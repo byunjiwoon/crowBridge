@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "175840265176",
+    "firebase_url": "https://mappi-ff747.firebaseio.com",
+    "project_id": "mappi-ff747",
+    "storage_bucket": "mappi-ff747.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175840265176:android:afa8429ae159270f",
+        "android_client_info": {
+          "package_name": "com.byun91.crow_bridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175840265176-84van5lqqn7s6kmnt72f3o00kn02c6ro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.byun91.crow_bridge",
+            "certificate_hash": "1b5f360042ff0cfc878d8b113212d7e78684c546"
+          }
+        },
+        {
+          "client_id": "175840265176-9ph2e0oshf7a0jgd8hir31mfrtepsa1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtxdmTqoeQMif59UlJAgpxreOaXE8sq3Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175840265176-9ph2e0oshf7a0jgd8hir31mfrtepsa1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
