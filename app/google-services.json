@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "175840265176-01udjss0dlu4f4n30dhr5tq66pek0ed2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.byun91.crow_bridge",
+            "certificate_hash": "412290d982a42d24ff7920cf89b27c98f6c79d4a"
+          }
+        },
+        {
           "client_id": "175840265176-9ph2e0oshf7a0jgd8hir31mfrtepsa1n.apps.googleusercontent.com",
           "client_type": 3
         }

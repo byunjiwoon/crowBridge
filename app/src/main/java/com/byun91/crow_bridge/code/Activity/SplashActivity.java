@@ -68,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
 
             // Configure Google Sign In
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestIdToken(getString(R.string.client_id))
                     .requestEmail()
                     .build();
 
@@ -136,6 +136,7 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+
     View.OnClickListener onClickListener = new View.OnClickListener(){
 
         @Override
@@ -146,6 +147,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
+
 
 
 
