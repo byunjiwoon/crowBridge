@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,14 +21,16 @@ import com.byun91.crow_bridge.code.Common.Utils;
 import com.byun91.crow_bridge.code.Value.RequestCodes;
 import com.byun91.crow_bridge.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     public static ActivityMainBinding b;
-
-    private static final int GALLERY_CODE = 10;
+    private FirebaseStorage firebaseStorage;
 
     private final String[] strRequiredTotalPermissions = new String[]{
         //    Manifest.permission.READ_PHONE_STATE,
@@ -46,7 +49,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         }
 
-
+        firebaseStorage.getInstance();
         setGnb(b);
         setMenuDrawer(b);
 
@@ -68,7 +71,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
 
-            startActivityForResult(intent, GALLERY_CODE);
+            startActivityForResult(intent, RequestCodes.GALLARY_CODE);
 
         }
 
@@ -87,10 +90,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_CODE){
+        if(requestCode == RequestCodes.GALLARY_CODE){
 
-           String uri = Utils.getPath(data.getData(),this);
-            Log.d("test", "onActivityResult: " + uri);
+            String uri = Utils.getPath(data.getData(),this);
+
+            Uri file = Uri.fromFile(new File(uri.toString()));
+            StorageReference imageRef = firebaseStorage.getReference().child("images/" + file.getLastPathSegment());
+            Log.d("test", "onActivityResult: " + "+ images/" + file.getLastPathSegment());
+
+
+
+
+
         }
     }
 
