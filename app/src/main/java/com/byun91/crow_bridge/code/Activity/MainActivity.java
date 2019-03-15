@@ -15,14 +15,21 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.byun91.crow_bridge.R;
+import com.byun91.crow_bridge.code.Common.G;
 import com.byun91.crow_bridge.code.Common.Utils;
 import com.byun91.crow_bridge.code.Value.RequestCodes;
 import com.byun91.crow_bridge.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +37,7 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     public static ActivityMainBinding b;
-    private FirebaseStorage firebaseStorage;
+    private FirebaseStorage storage;
 
     private final String[] strRequiredTotalPermissions = new String[]{
         //    Manifest.permission.READ_PHONE_STATE,
@@ -49,7 +56,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         }
 
-        firebaseStorage.getInstance();
+        storage = FirebaseStorage.getInstance();
         setGnb(b);
         setMenuDrawer(b);
 
@@ -76,9 +83,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
 
 
-
-
-
     }
 
     @Override
@@ -95,12 +99,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             String uri = Utils.getPath(data.getData(),this);
 
             Uri file = Uri.fromFile(new File(uri.toString()));
-            StorageReference imageRef = firebaseStorage.getReference().child("images/" + file.getLastPathSegment());
-            Log.d("test", "onActivityResult: " + "+ images/" + file.getLastPathSegment());
+            final StorageReference imageRef = storage.getReference().child(G.userMail);
+            UploadTask uploadTask = imageRef.putFile(file);
 
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
+                    Toast.makeText(MainActivity.this, "이미지 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show();
 
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(MainActivity.this, "이미지 업로드에 성공했습니다.", Toast.LENGTH_SHORT).show();
 
+                    Picasso.with(MainActivity.this).load(imageRef.getDownloadUrl().toString()).into(b.includeSlideMenu.profileImage);
+
+                }
+            });
 
         }
     }

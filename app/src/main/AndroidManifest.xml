@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".code.Activity.SplashActivity"
+        <activity android:name="com.byun91.crow_bridge.code.Activity.SplashActivity"
 
             >
             <intent-filter>
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".code.Activity.MainActivity"></activity>
+        <activity android:name="com.byun91.crow_bridge.code.Activity.MainActivity"></activity>
     </application>
 
 </manifest>
